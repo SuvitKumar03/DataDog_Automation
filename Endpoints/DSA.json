@@ -1,0 +1,242 @@
+[
+    {
+        "name": "POST /api/commonservices/appuser",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "4aee92d647b833b4"
+    },
+    {
+        "name": "POST /api/login/login",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "bfcc0bacd7e1a47b"
+    },
+    {
+        "name": "POST /api/ordersummary/ordersummary",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "865c436b600cebc"
+    },
+    {
+        "name": "POST /api/usermanager/velsodsadtl",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "e24d99b7a2de6b0b"
+    },
+    {
+        "name": "POST /api/cartmaster/dsaviewcartdtl",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "76a54b367e68f75e"
+    },
+    {
+        "name": "POST /api/techsoapi/getappointmentslots",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "eeb586b7601588d2"
+    },
+    {
+        "name": "POST /api/techsoapi/pincodeavailability",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "98f8899cac02e0b4"
+    },
+    {
+        "name": "POST /api/ledger/getledgerbalance",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "7b18aa03515a015d"
+    },
+    {
+        "name": "POST /api/BookingMaster/BookingSummaryWithFilter",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "25262308de02527"
+    },
+    {
+        "name": "POST /api/incentive/calculatedsaincentive",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "75876cf4911b230e"
+    },
+    {
+        "name": "POST /api/bookingmaster/dsabooking",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "f6e603e8c0d99538"
+    },
+    {
+        "name": "POST /api/bookingmaster/hl7dsabooking",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "ce5aeeedcf8659d5"
+    },
+    {
+        "name": "POST /api/bookingmaster/pedsabooking",
+        "service": "velso-api",
+        "operation": "aspnet_core.request",
+        "hash": "6c8429924812bd29"
+    },
+    {
+        "name": "POST /velso/api/login",
+        "service": "prod-clisomw-deployment",
+        "operation": "express.request",
+        "hash": "d1468cdb6881a154"
+    },
+    {
+        "name": "POST /velso/ProductsMaster/Products",
+        "service": "prod-clisomw-deployment",
+        "operation": "express.request",
+        "hash": "f26d21737ae09f2c"
+    },
+    {
+        "name": "POST /velso/TechsoApi/GetAppointmentSlots",
+        "service": "prod-clisomw-deployment",
+        "operation": "express.request",
+        "hash": "c19d08fddb80a5c9"
+    },
+    {
+        "name": "POST /velso/OrderSummary/OrderSummary",
+        "service": "prod-clisomw-deployment",
+        "operation": "express.request",
+        "hash": "9aee2804e5b02990"
+    },
+    {
+        "name": "POST /velso/BookingMaster/BookingSummaryWithFilter",
+        "service": "prod-clisomw-deployment",
+        "operation": "express.request",
+        "hash": "a235dc27a1d9d6f2"
+    },
+    {
+        "name": "POST /dsa/micro-dsa/create-order",
+        "service": "prod-clisomw-deployment",
+        "operation": "express.request",
+        "hash": "f052e43975c24fa0"
+    },
+    {
+        "name": "POST /booking-master/v2/create-order",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "16fa9b4ddd420a6a"
+    },
+    {
+        "name": "GET /user-master/dsa-packages",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "1d69b4cb72369f2c"
+    },
+    {
+        "name": "GET /user-master/dsa-info/{refNo}",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "678d9487a0dd381"
+    },
+    {
+        "name": "POST /incentive/get-incentive-details",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "8825ae32c236f9e3"
+    },
+    {
+        "name": "POST /incentive/update-incentive-details",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "20129de66b62cd23"
+    },
+    {
+        "name": "GET /ledger/balance",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "d355fdaea849606c"
+    },
+    {
+        "name": "GET /order.svc/sp{num}/getreporturl",
+        "service": "b2capi.thyrocare.com/apis",
+        "operation": "aspnet.request",
+        "hash": "90503b839704d3d8"
+    },
+    {
+        "name": "POST /v1/auth/login",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "dd7f05c2da9c6954"
+    },
+    {
+        "name": "POST /v1/auth/logout",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "10a768a31be09380"
+    },
+    {
+        "name": "POST /v1/auth/otp/generate",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "126946703e8518d1"
+    },
+    {
+        "name": "POST /v1/auth/otp/verify",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "4939b6367213aa18"
+    },
+    {
+        "name": "GET /v1/catalog/products",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "7092aa8090521d4d"
+    },
+    {
+        "name": "POST /v1/cart/price-breakup",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "6dba26a63ac566e"
+    },
+    {
+        "name": "GET /v1/serviceability/pincodes",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "aaa4c8f51f5bc0a8"
+    },
+    {
+        "name": "POST /v1/slots/search",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "a1bdf78f9e9f8be6"
+    },
+    {
+        "name": "POST /v1/orders",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "6df56fdc7d683e59"
+    },
+    {
+        "name": "GET /v1/orders",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "33aa63318341b7da"
+    },
+    {
+        "name": "GET /v1/orders/{orderId}",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "6bc03299aa22f058"
+    },
+    {
+        "name": "POST /v1/orders/{orderId}/reschedule",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "e5183e4d9d71c6d8"
+    },
+    {
+        "name": "DELETE /v1/orders/{orderId}/cancel",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "4d594117914be73d"
+    },
+    {
+        "name": "GET /v1/{orderId}/reports/{leadId}",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "934cbe3d6373d71e"
+    }
+]

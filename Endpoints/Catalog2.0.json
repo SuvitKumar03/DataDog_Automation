@@ -1,0 +1,176 @@
+[
+  {
+    "name": "GET /catalog/get/{catalogId}",
+    "hash": "7f3160823d0b52a7",
+    "service": "prod-catalog-router-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /catalog/set/{catalogId}",
+    "hash": "bd8f4eafa30432ea",
+    "service": "prod-catalog-router-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /catalog/{portal}/price",
+    "hash": "13f6b856f3646b72",
+    "service": "prod-catalog-router-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "GET /catalog/description/getAllMetadata",
+    "hash": "cdf9ee2c1bb1489e",
+    "service": "prod-catalog-router-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /catalog/description",
+    "hash": "dfd4869447bd9a8e",
+    "service": "prod-catalog-router-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "GET /pleconfig/{franchiseId}/configured",
+    "hash": "9874f74125044c84",
+    "service": "prod-catalog-router-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "GET /v1/{api_key}/{displaytype}/getproducts",
+    "hash": "47fb8d96f5a79dba",
+    "service": "cliso-api",
+    "operation": "aspnet.request"
+  },
+  {
+    "name": "POST /v1/getproductsfromfranchiseid",
+    "hash": "66c2f172dcfd89e9",
+    "service": "cliso-api",
+    "operation": "aspnet.request"
+  },
+  {
+    "name": "GET /segments/get-segments-for-userId/{userId}/{tenantId}",
+    "hash": "78a6cc7927662485",
+    "service": "prod-segmentation-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /v1/sku/client",
+    "hash": "cc7e1ea49bb63774",
+    "service": "prod-catalogue-pricing-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /v1/sku/create",
+    "hash": "38bfb31851eeb818",
+    "service": "prod-catalogue-pricing-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "GET /client/checkIfUserOnboarded/{franchiseId}",
+    "hash": "5e74e6af720c9538",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /client/CLISO/price",
+    "hash": "54b9a3ae255685db",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "GET /client/description/getAllMetadata/{franchiseId}",
+    "hash": "5ec91d2471642151",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "GET /client/getProducts/{franchiseId}",
+    "hash": "c68a1d5e14cc61e5",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /client/catalog/description",
+    "hash": "35584be9fd832e0d",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "GET /client/microsite/getProducts/{franchiseId}",
+    "hash": "b3a689a48c04330",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /client/test-groups",
+    "hash": "1b2f1f35515ecd6c",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /client/getProductsBySku",
+    "hash": "755aafbe5a89fd90",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /mapping/catalog-price",
+    "hash": "72990328b4480a0e",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /client/oms/items",
+    "hash": "d47f2e523389b515",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /client/oms/items-offers-combined",
+    "hash": "742a350f6851382",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /parameter/get-details",
+    "hash": "abda4b582c6e7391",
+    "service": "prod-catalog-service-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /items/b2c",
+    "hash": "eb0acfb98c306cae",
+    "service": "prod-catalog-gateway-deployment",
+    "operation": "servlet.request"
+  },
+  {
+    "name": "POST /api/productsmaster/products",
+    "hash": "d04990d8a5336271",
+    "service": "velso-api",
+    "operation": "aspnet_core.request"
+  },
+  {
+    "name": "POST /api/productsmaster/wellnessproducts",
+    "hash": "81349929b70156ff",
+    "service": "velso-api",
+    "operation": "aspnet_core.request"
+  },
+  {
+    "name": "POST /api/productsmaster/staffproducts",
+    "hash": "38026e8d0f0179d1",
+    "service": "velso-api",
+    "operation": "aspnet_core.request"
+  },
+  {
+    "name": "GET /api/brandtestratelist/{id}/{fromdate}/{todate}",
+    "hash": "b66a76cb50be50e",
+    "service": "techso-api",
+    "operation": "aspnet.request"
+  },
+  {
+    "name": "GET /public/brand-test-rate-list",
+    "hash": "885e380958afb720",
+    "service": "production-phlebo-management-rollout",
+    "operation": "servlet.request"
+  }
+]
