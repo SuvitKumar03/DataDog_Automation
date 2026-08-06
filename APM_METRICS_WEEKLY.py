@@ -25,7 +25,7 @@ from datadog_api_client.v2.model.scalar_formula_request_type import ScalarFormul
 def specific_window():
     """
     Calculates millisecond timestamps for the explicit timeline:
-    Jul 6, 12:00 am – Jul 12, 11:59 pm (UTC+05:30)
+    Jul 20, 12:00 am – Jul 26, 11:59 pm (UTC+05:30)
     
     Returns:
         from_ts (int): Start timestamp in milliseconds
@@ -36,8 +36,8 @@ def specific_window():
     tz_offset = timezone(timedelta(hours=5, minutes=30))
     
     # Define start and end datetimes matching your timezone offset
-    start_dt = datetime(2026, 7, 6, 0, 0, 0, tzinfo=tz_offset)
-    end_dt = datetime(2026, 7, 12, 23, 59, 0, tzinfo=tz_offset)
+    start_dt = datetime(2026, 7, 20, 0, 0, 0, tzinfo=tz_offset)
+    end_dt = datetime(2026, 7, 26, 23, 59, 0, tzinfo=tz_offset)
     
     from_ts = int(start_dt.timestamp() * 1000)
     to_ts = int(end_dt.timestamp() * 1000)
@@ -176,6 +176,11 @@ def main():
     end_str = end_dt.strftime("%Y-%m-%d")
     excel_filename = f"APM_Metrics_{start_str}_to_{end_str}.xlsx"
 
+    # Derive dynamic Excel sheet name from dates (e.g., "Metrics_27Jul_02Aug")
+    sheet_start_fmt = start_dt.strftime("%d%b")
+    sheet_end_fmt = end_dt.strftime("%d%b")
+    dynamic_sheet_name = f"Metrics_{sheet_start_fmt}_{sheet_end_fmt}"[:31]
+
     grouped_endpoints = load_endpoints_by_file(folder_name)
     if not grouped_endpoints:
         print("No endpoint JSON files found. Exiting.")
@@ -202,25 +207,30 @@ def main():
                     p99_ms = convert_sec_to_ms(metrics["p99"])
                     avg_latency_ms = convert_sec_to_ms(metrics["avg_latency"])
 
+                    # 1. Default errors to 0 if None
+                    errors_count = metrics["errors"] if metrics["errors"] is not None else 0
+
+                    # 2. Convert error_rate fraction to percentage (multiply by 100)
+                    error_rate_pct = round(metrics["error_rate"] * 100, 2) if metrics["error_rate"] is not None else 0.0
+
+                    # 3. Exact column ordering: service, endpoint, hash, count, avg_latency, p95, p99, errors, error_rate (%)
                     file_results.append(
                         {
                             "service": endpoint.get("service"),
                             "endpoint": endpoint.get("name"),
                             "resource_hash": endpoint.get("hash"),
+                            "count": metrics["count"] if metrics["count"] is not None else 0,
+                            "avg_latency (ms)": avg_latency_ms,
                             "p95 (ms)": p95_ms,
                             "p99 (ms)": p99_ms,
-                            "avg_latency (ms)": avg_latency_ms,
-                            "count": metrics["count"],
-                            "errors": metrics["errors"],
-                            "error_rate": metrics["error_rate"],
+                            "errors": errors_count,
+                            "error_rate (%)": error_rate_pct,
                         }
                     )
 
-                # Excel sheet name limit is 31 characters
-                safe_sheet_name = file_group[:31]
-
                 df = pd.DataFrame(file_results)
-                df.to_excel(writer, sheet_name=safe_sheet_name, index=False)
+                sheet_label = f"{file_group}_{sheet_start_fmt}_{sheet_end_fmt}"[:31] if len(grouped_endpoints) > 1 else dynamic_sheet_name
+                df.to_excel(writer, sheet_name=sheet_label, index=False)
 
     print(f"\nSuccess! Exported metrics for {start_str} to {end_str} across {len(grouped_endpoints)} tabs in '{excel_filename}'.")
 

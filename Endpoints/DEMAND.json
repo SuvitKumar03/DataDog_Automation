@@ -1,4 +1,10 @@
 [
+     {
+        "name": "POST /carbon/bulk (Cliso MW)",
+        "service": "prod-clisomw-deployment",
+        "operation": "express.request",
+        "hash": "5e52f68a12aff7d2"
+    },
     {
         "name": "POST /ledger/api/v1/ledgerDetail",
         "service": "production-b2b-ledger-service-deployment",
@@ -10,12 +16,6 @@
         "service": "production-b2b-ledger-service-deployment",
         "operation": "servlet.request",
         "hash": "17efce1f86f49410"
-    },
-    {
-        "name": "POST /carbon/bulk (Cliso MW)",
-        "service": "prod-clisomw-deployment",
-        "operation": "express.request",
-        "hash": "5e52f68a12aff7d2"
     },
     {
         "name": "GET /API/B2B/COMMON.svc/v1/{tspName}/LedgerDetails",
@@ -150,6 +150,36 @@
         "hash": "1a466817aea2d1ae"
     },
     {
+        "name": "GET /api/batches",
+        "hash": "ca597db43e53b434",
+        "service": "prod-hlm-backend-deployment",
+        "operation": "servlet.request"
+    },
+    {
+        "name": "POST /api/batches/presign",
+        "hash": "6ce12e573ea385ad",
+        "service": "prod-hlm-backend-deployment",
+        "operation": "servlet.request"
+    },
+    {
+        "name": "POST /api/batches/{batchId}/validate-upload",
+        "hash": "212cc31c392d9c04",
+        "service": "prod-hlm-backend-deployment",
+        "operation": "servlet.request"
+    },
+    {
+        "name": "POST /api/batches/{batchId}/rows",
+        "hash": "3c43220e2ef7c085",
+        "service": "prod-hlm-backend-deployment",
+        "operation": "servlet.request"
+    },
+    {
+        "name": "POST /api/batches/{batchId}/process",
+        "hash": "91424c0ab2fb1931",
+        "service": "prod-hlm-backend-deployment",
+        "operation": "servlet.request"
+    },
+    {
         "name": "GET /v1/payments",
         "service": "prod-tc-payment-orchestration-deployment",
         "operation": "servlet.request",
@@ -196,6 +226,18 @@
         "service": "prod-customer-service-deployment",
         "operation": "servlet.request",
         "hash": "2d0502658973775b"
+    },
+    {
+    "name": "POST /v2/api/auth/login",
+    "hash": "35406c9f9dfe6b28",
+    "service": "prod-aadhar-deployment",
+    "operation": "servlet.request"
+    },
+    {
+        "name": "POST /v2/api/auth/refresh",
+        "hash": "b193414ebc592ebd",
+        "service": "prod-aadhar-deployment",
+        "operation": "servlet.request"
     }
 ]
 
