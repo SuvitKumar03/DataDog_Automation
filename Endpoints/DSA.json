@@ -120,6 +120,13 @@
         "hash": "16fa9b4ddd420a6a"
     },
     {
+        "name": "POST /user-master/create-micro-dsa",
+        "service": "production-dx-dsa-service-deployment",
+        "operation": "servlet.request",
+        "hash": "3a0a0e28b46b0a9b"
+    }
+    ,
+    {
         "name": "GET /user-master/dsa-packages",
         "service": "production-dx-dsa-service-deployment",
         "operation": "servlet.request",

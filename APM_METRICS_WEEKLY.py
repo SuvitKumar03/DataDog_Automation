@@ -25,7 +25,7 @@ from datadog_api_client.v2.model.scalar_formula_request_type import ScalarFormul
 def specific_window():
     """
     Calculates millisecond timestamps for the explicit timeline:
-    Jul 20, 12:00 am – Jul 26, 11:59 pm (UTC+05:30)
+    Jul 27, 12:00 am – Aug 2, 11:59 pm (UTC+05:30)
     
     Returns:
         from_ts (int): Start timestamp in milliseconds
@@ -36,8 +36,8 @@ def specific_window():
     tz_offset = timezone(timedelta(hours=5, minutes=30))
     
     # Define start and end datetimes matching your timezone offset
-    start_dt = datetime(2026, 7, 20, 0, 0, 0, tzinfo=tz_offset)
-    end_dt = datetime(2026, 7, 26, 23, 59, 0, tzinfo=tz_offset)
+    start_dt = datetime(2026, 7, 27, 0, 0, 0, tzinfo=tz_offset)
+    end_dt = datetime(2026, 8, 2, 23, 59, 0, tzinfo=tz_offset)
     
     from_ts = int(start_dt.timestamp() * 1000)
     to_ts = int(end_dt.timestamp() * 1000)
@@ -164,7 +164,7 @@ def extract_metric_values(response):
 def convert_sec_to_ms(val):
     if val is not None:
         return round(val * 1000, 2)
-    return None
+    return 0.0  # Returns 0.0 if latency value is null/empty
 
 
 def main():
@@ -202,24 +202,26 @@ def main():
                     response = api_instance.query_scalar_data(body=body)
                     metrics = extract_metric_values(response)
 
-                    # Conversion step: multiply latency metrics (sec) by 1000 -> ms
+                    # Latencies: convert sec to ms, returning 0.0 if null
                     p95_ms = convert_sec_to_ms(metrics["p95"])
                     p99_ms = convert_sec_to_ms(metrics["p99"])
                     avg_latency_ms = convert_sec_to_ms(metrics["avg_latency"])
 
-                    # 1. Default errors to 0 if None
+                    # Hits / Count: default to 0 if null
+                    hits_count = metrics["count"] if metrics["count"] is not None else 0
+
+                    # Errors: default to 0 if null
                     errors_count = metrics["errors"] if metrics["errors"] is not None else 0
 
-                    # 2. Convert error_rate fraction to percentage (multiply by 100)
+                    # Error Rate: convert fraction to percentage, defaulting to 0.0 if null
                     error_rate_pct = round(metrics["error_rate"] * 100, 2) if metrics["error_rate"] is not None else 0.0
 
-                    # 3. Exact column ordering: service, endpoint, hash, count, avg_latency, p95, p99, errors, error_rate (%)
                     file_results.append(
                         {
                             "service": endpoint.get("service"),
                             "endpoint": endpoint.get("name"),
                             "resource_hash": endpoint.get("hash"),
-                            "count": metrics["count"] if metrics["count"] is not None else 0,
+                            "count": hits_count,
                             "avg_latency (ms)": avg_latency_ms,
                             "p95 (ms)": p95_ms,
                             "p99 (ms)": p99_ms,

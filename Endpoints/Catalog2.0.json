@@ -79,9 +79,9 @@
   },
   {
     "name": "GET /client/getProducts/{franchiseId}",
-    "hash": "c68a1d5e14cc61e5",
     "service": "prod-catalog-service-deployment",
-    "operation": "servlet.request"
+    "operation": "servlet.request",
+    "hash": "c68a1d5e14cc61e5"
   },
   {
     "name": "GET /client/microsite/getProducts/{franchiseId}",
