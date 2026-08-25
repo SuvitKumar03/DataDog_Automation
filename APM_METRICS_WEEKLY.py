@@ -36,8 +36,8 @@ def specific_window():
     tz_offset = timezone(timedelta(hours=5, minutes=30))
     
     # Define start and end datetimes matching your timezone offset
-    start_dt = datetime(2026, 7, 27, 0, 0, 0, tzinfo=tz_offset)
-    end_dt = datetime(2026, 8, 2, 23, 59, 0, tzinfo=tz_offset)
+    start_dt = datetime(2026, 8, 17, 0, 0, 0, tzinfo=tz_offset)
+    end_dt = datetime(2026, 8, 23, 23, 59, 0, tzinfo=tz_offset)
     
     from_ts = int(start_dt.timestamp() * 1000)
     to_ts = int(end_dt.timestamp() * 1000)
@@ -129,6 +129,70 @@ def build_request(endpoint: dict, from_ts: int, to_ts: int) -> ScalarFormulaQuer
             type=ScalarFormulaRequestType.SCALAR_REQUEST,
         ),
     )
+
+
+def build_status_code_request(endpoint: dict, from_ts: int, to_ts: int) -> ScalarFormulaQueryRequest:
+    """
+    Separate request for the 4xx/5xx breakdown.
+
+    APM trace metrics (data_source=apm_metrics) don't expose http.status_class
+    as a filterable tag on the hits/errors stats -- query_filter="http.status_class:4xx"
+    matches nothing there (confirmed against live data: even query_filter="error:1"
+    returns null for this data source + resource_hash scoping). http.status_code IS
+    a valid group_by dimension on hits, so the breakdown is derived by grouping hits
+    by status code and bucketing 4xx/5xx in Python instead.
+
+    Kept as its own request rather than merged into build_request(): mixing a grouped
+    query with ungrouped ones in a single Scalar request misaligns rows (the ungrouped
+    values collapse onto a single row instead of applying to every group).
+    """
+    return ScalarFormulaQueryRequest(
+        data=ScalarFormulaRequest(
+            attributes=ScalarFormulaRequestAttributes(
+                _from=from_ts,
+                to=to_ts,
+                queries=ScalarFormulaRequestQueries(
+                    [
+                        ApmMetricsQuery(
+                            name="hits_by_status",
+                            stat=ApmMetricsStat.HITS,
+                            group_by=["http.status_code"],
+                            data_source=ApmMetricsDataSource.APM_METRICS,
+                            service=endpoint["service"],
+                            operation_name=endpoint["operation"],
+                            resource_hash=endpoint["hash"],
+                        ),
+                    ]
+                ),
+                formulas=[QueryFormula(formula="hits_by_status")],
+            ),
+            type=ScalarFormulaRequestType.SCALAR_REQUEST,
+        ),
+    )
+
+
+def extract_status_class_breakdown(response) -> dict:
+    """Buckets a group_by(http.status_code) scalar response into 4xx/5xx totals."""
+    data = response.to_dict()
+    columns = data.get("data", {}).get("attributes", {}).get("columns", [])
+
+    group_col = next((c for c in columns if c.get("type") == "group"), None)
+    number_col = next((c for c in columns if c.get("type") == "number"), None)
+
+    totals = {"4xx": 0, "5xx": 0}
+    if group_col is None or number_col is None:
+        return totals
+
+    for code_group, hit_count in zip(group_col.get("values", []), number_col.get("values", [])):
+        code = code_group[0] if code_group else None
+        if not code or not code.isdigit() or hit_count is None:
+            continue
+        if code.startswith("4"):
+            totals["4xx"] += hit_count
+        elif code.startswith("5"):
+            totals["5xx"] += hit_count
+
+    return totals
 
 
 def extract_metric_values(response):
